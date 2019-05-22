@@ -28,6 +28,7 @@ import android.support.annotation.Nullable;
 import com.microsoft.identity.common.internal.cache.ICacheRecord;
 import com.microsoft.identity.common.internal.dto.AccessTokenRecord;
 import com.microsoft.identity.common.internal.dto.IAccountRecord;
+import com.microsoft.identity.common.internal.dto.RefreshTokenRecord;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -43,10 +44,12 @@ public final class AuthenticationResult implements IAuthenticationResult {
     private final String mUniqueId;
 
     private final AccessTokenRecord mAccessToken;
+    private final RefreshTokenRecord mRefreshToken;
     private final IAccount mAccount;
 
     public AuthenticationResult(@NonNull final ICacheRecord cacheRecord) {
         mAccessToken = cacheRecord.getAccessToken();
+        mRefreshToken = cacheRecord.getRefreshToken();
         mTenantId = cacheRecord.getAccount().getRealm();
         mUniqueId = cacheRecord.getAccount().getHomeAccountId();
         mRawIdToken = cacheRecord.getIdToken().getSecret();
@@ -54,9 +57,11 @@ public final class AuthenticationResult implements IAuthenticationResult {
     }
 
     public AuthenticationResult(@NonNull AccessTokenRecord accessToken,
+                                @NonNull RefreshTokenRecord refreshToken,
                                 @Nullable String rawIdToken,
                                 @NonNull IAccountRecord accountRecord) {
         mAccessToken = accessToken;
+        mRefreshToken = refreshToken;
         mTenantId = accessToken.getRealm();
         mUniqueId = accessToken.getHomeAccountId();
         mRawIdToken = rawIdToken;
@@ -68,6 +73,12 @@ public final class AuthenticationResult implements IAuthenticationResult {
     @NonNull
     public String getAccessToken() {
         return mAccessToken.getSecret();
+    }
+
+    @Override
+    @NonNull
+    public String getRefreshToken() {
+        return mRefreshToken.getSecret();
     }
 
     @Override

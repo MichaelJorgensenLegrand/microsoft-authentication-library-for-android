@@ -37,6 +37,7 @@ import android.widget.TextView;
 public class ResultFragment extends Fragment {
 
     static final String ACCESS_TOKEN = "access_token";
+    static final String REFRESH_TOKEN = "refresh_token";
     static final String ID_TOKEN = "id_token";
     static final String DISPLAYABLE = "displayable";
 
@@ -54,9 +55,10 @@ public class ResultFragment extends Fragment {
         final Bundle bundle = getArguments();
         final String accessToken = (String) bundle.get(ACCESS_TOKEN);
         final String idToken = (String) bundle.get(ID_TOKEN);
+        final String refreshToken = (String) bundle.get(REFRESH_TOKEN);
         final String displayable = (String) bundle.get(DISPLAYABLE);
 
-        mTextView.setText(ACCESS_TOKEN + ": " + accessToken + '\n' + ID_TOKEN + ": " + idToken + '\n' + DISPLAYABLE + ": " + displayable);
+        mTextView.setText(ACCESS_TOKEN + ": " + accessToken + '\n' + ID_TOKEN + ": " + idToken + '\n' +  REFRESH_TOKEN + ": " + refreshToken + '\n' + DISPLAYABLE + ": " + displayable);
         mTextView.setMovementMethod(new ScrollingMovementMethod());
         return view;
     }

@@ -36,6 +36,12 @@ public interface IAuthenticationResult {
     String getAccessToken();
 
     /**
+     * @return The access token requested.
+     */
+    @NonNull
+    String getRefreshToken();
+
+    /**
      * @return The expiration time of the access token returned in the Token property.
      * This value is calculated based on current UTC time measured locally and the value expiresIn returned from the
      * service.
